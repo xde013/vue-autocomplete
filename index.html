@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>TicTac</title>
+</head>
+
+<body>
+    <div id="app">
+        <div v-if="!close" class="notification" style="top: 0; position: fixed; z-index: 2">
+            <button class="delete" v-on:click="close = !close"></button> Please disable <strong>same origin policy </strong> in your browser in order to run this properly. This is strictly for development, not production use. Add to response header rule
+            - <em> 'Access-Control-Allow-Origin: *' </em> or install this <a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi"> add-on </a> if you are running on Chrome.
+        </div>
+        <div class="container is-mobile" style="margin-top: 8%">
+            <div class="columns ">
+                <div class="column is-8 is-offset-2 ">
+                    <h2 class="title "> {{ message }}</h2>
+                    <h4 class="subtitle is-4 ">Quel est votre trajet ?</h4>
+                    <div class="columns ">
+                        <div class="column ">
+                            <div class="box ">
+                                <label class="label is-large ">Départ</label>
+                                <div class="control is-medium has-icons-left " v-bind:class="{ loading: notice_a } ">
+                                    <input class="input is-medium is-primary " type="text " name="depart " id=" " v-model="inputFrom " placeholder="Saisissez votre gare de départ.. ">
+                                    <span class="icon is-small is-left has-text-success ">
+                                            <i class="fa fa-sign-out " aria-hidden="true "></i>
+                                    </span>
+                                </div>
+                                <br>
+                                <h6 class="subtitle is-6 has-text-centered " v-if="notice_a "><em> {{ notice_a }} </em></h6>
+                                <br>
+                                <div class="buttons ">
+                                    <span class="button is-outlined" v-for="a in optionsFrom " :value="a " v-on:click="setChoiceFrom(a) ">
+                                        <span class="icon">
+                                             <i class="fa fa-map-marker " aria-hidden="true "></i> 
+                                        </span>
+                                    <span> {{ a | capitalize }} </span>
+                                    </span>
+                                </div>
+                                <!-- <b>{{ choiceFrom }} </b> -->
+                            </div>
+                        </div>
+                        <div class="column ">
+                            <div class="box ">
+                                <label class="label is-large ">Arrivée</label>
+                                <div class="control is-medium has-icons-left " v-bind:class="{ isloading: notice_b } ">
+                                    <input class="input is-medium is-primary " type="text " name="arrive " id=" " v-model="inputTo " placeholder="Saisissez votre gare d 'arrivée..">
+                                    <span class="icon is-small is-left has-text-success">
+                                            <i class="fa fa-sign-in" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <br>
+                                <h6 class="subtitle is-6 has-text-centered" v-if="notice_b"> <em> {{ notice_b }} </em> </h6>
+                                <br>
+                                <div class="buttons">
+
+                                    <span class="button" v-for="b in optionsTo" :value="b" v-on:click="setChoiceTo(b)">
+                                            <span class="icon">
+                                                    <i class="fa fa-map-marker" aria-hidden="true"></i>                                                
+                                            </span>
+                                    <span>{{ b | capitalize }}</span>
+                                    </span>
+                                </div>
+                                <br>
+                                <!-- <b>{{ choiceTo }}</b> -->
+                            </div>
+                        </div>
+                        <!-- <ul name="" id="">
+                            <li v-for="p in populars" :value="p"> {{ p }} </li>
+                        </ul> -->
+                        <br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://unpkg.com/vue"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.js"></script>
+<script src="main.js"></script>
+
+</html>
